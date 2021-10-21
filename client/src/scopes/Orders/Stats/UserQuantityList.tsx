@@ -14,9 +14,7 @@ const UserQuantityList = () => {
     );
   }, [orders]);
 
-  useEffect(() => {
-    //console.log(userAndQuantity);
-  }, [userAndQuantity]);
+  useEffect(() => {}, [userAndQuantity]);
   return (
     <div className="userAndQuantity">
       <h2>Total order by user</h2>

@@ -59,7 +59,7 @@ orderRouter.delete('/orders/delete', authenticateToken, (req, res) => {
 });
 
 orderRouter.delete('/orders/delete/:id', authenticateToken, (req, res) => {
-  OrderModel.deleteOne({ id: req.params.id }, {}, (err) => {
+  OrderModel.deleteOne({ _id: req.params.id }, {}, (err) => {
     if (err) {
       res.status(400).send('Error during delete');
     } else {

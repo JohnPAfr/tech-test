@@ -1,7 +1,15 @@
+import { AxiosResponse } from "axios";
 import React from "react";
 import axios from "../../config/axios";
 import { useAppContext } from "../../contexts/AppContext";
 import { isNumber } from "../../utils/utils";
+
+type ResponseData = {
+  _id: string;
+  username: string;
+  quantity: number;
+  date: Date;
+};
 
 const OrderForm = () => {
   const { token, user, ordersState, setOrdersState } = useAppContext();
@@ -21,7 +29,7 @@ const OrderForm = () => {
   const handleOrder = async () => {
     if (user) {
       if (quantity === 0) return;
-      const response = await axios.post(
+      const response: AxiosResponse<ResponseData, any> = await axios.post(
         "orders/add",
         { username: user.username, quantity },
         {
@@ -30,9 +38,15 @@ const OrderForm = () => {
           },
         }
       );
+      const newOrder = {
+        id: response.data._id,
+        username: response.data.username,
+        quantity: response.data.quantity,
+        date: response.data.date,
+      };
       setOrdersState({
         ...ordersState,
-        orders: [...orders, response.data],
+        orders: [...orders, newOrder],
         quantity: 0,
       });
     }

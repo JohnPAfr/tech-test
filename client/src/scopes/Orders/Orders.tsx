@@ -45,10 +45,6 @@ export default function Orders() {
     if (!user) history.push("/login");
   }, [user]);
 
-  useEffect(() => {
-    //console.log(orders);
-  }, [orders]);
-
   return (
     <div className="Orders">
       <div className="table">
