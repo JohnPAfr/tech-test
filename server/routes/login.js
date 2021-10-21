@@ -20,7 +20,7 @@ loginRouter.post('/login', async (req, res) => {
     }
   } else {
     try {
-      if (req.body.username.length <= 10) res.status(401).send('Login too long');
+      if (req.body.username.length >= 16) res.status(401).send('Login too long');
       else {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const newUser = UserModel();
